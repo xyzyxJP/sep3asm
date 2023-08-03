@@ -19,13 +19,23 @@
         },
         {
             "type": "java",
-            "name": "TestSep3asmToken",
+            "name": "TestSep3asmToken on Windows",
             "request": "launch",
             "mainClass": "lang.sep3asm.TestSep3asmToken",
             "projectName": "sep3asm",
             "args": [
                 "bin\\lang\\sep3asm\\fib.s"
             ]
-        }
+        },
+        {
+            "type": "java",
+            "name": "TestSep3asmToken on macOS",
+            "request": "launch",
+            "mainClass": "lang.sep3asm.TestSep3asmToken",
+            "projectName": "sep3asm",
+            "args": [
+                "bin/lang/sep3asm/fib.s"
+            ]
+        },
     ]
 }
