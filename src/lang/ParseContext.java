@@ -35,14 +35,7 @@ public abstract class ParseContext {
     private int errorNo = 0; // 解析エラー数
 
     public void errorReport() {
-        String errstr, warnstr;
-        if (errorNo > 0) {
-            errstr = "%%% 問題箇所が全部で" + errorNo + "件ありました。";
-        } else {
-            errstr = "%%% 問題箇所はありません。";
-        }
-        warnstr = (warningNo > 0) ? ("その他に警告は" + warningNo + "件ありました。") : "";
-        ioCtx.getErrStream().println(errstr + warnstr);
+        ioCtx.getErrStream().println("Error: " + errorNo + ", Warning: " + warningNo);
     }
 
     private void message(final String s) {

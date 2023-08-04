@@ -7,7 +7,7 @@ DATA1	= DATA2
 DATA2	= 0x99
 ; this
 BEG:
-		MOV #5, (SP)+  kda	; 206 43fe 0005
+		MOV #5, (SP)+		; 206 43fe 0005
 		JSR FIB				; 208 b3fe 020e
 		SUB #1, SP			; 20a 63e6 0001
 		MOV R4, (R0)		; 20c 4088

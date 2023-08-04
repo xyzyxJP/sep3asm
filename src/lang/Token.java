@@ -10,6 +10,7 @@ public abstract class Token {
     public abstract int getColumnNo();
 
     public String toExplainString() {
-        return "[" + getLineNo() + "行目," + getColumnNo() + "文字目の'" + getText() + "']";
+        // return "[" + getLineNo() + "行目," + getColumnNo() + "文字目の'" + getText() +
+        return getText() + " [Ln " + getLineNo() + ", Col " + getColumnNo() + "]";
     }
 }

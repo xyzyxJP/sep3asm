@@ -4,11 +4,13 @@ import lang.IOContext;
 import lang.SimpleParseContext;
 
 public class Sep3asmParseContext extends SimpleParseContext {
-    Sep3asmSymbolTable symTbl;
+    private Sep3asmSymbolTable symTbl;
+    public boolean hasDotEnd;
 
     public Sep3asmParseContext(IOContext ioCtx, Sep3asmTokenizer tknz) {
         super(ioCtx, tknz);
         symTbl = new Sep3asmSymbolTable();
+        hasDotEnd = false;
     }
 
     @Override
@@ -32,5 +34,10 @@ public class Sep3asmParseContext extends SimpleParseContext {
 
     public void setLocationCounter(int n) {
         locationCounter = n;
+    }
+
+    public void output(int n) {
+        getIOContext().getOutStream().printf("%04X:%04X\n", 0xFFFF & locationCounter, 0xFFFF & n);
+        addLocationCounter(1);
     }
 }

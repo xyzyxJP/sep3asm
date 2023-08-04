@@ -10,6 +10,7 @@ import lang.sep3asm.Sep3asmTokenizer;
 
 public class Program extends Sep3asmParseRule {
     // program ::= { line } EOF
+
     private ArrayList<Sep3asmParseRule> list;
 
     public Program(Sep3asmParseContext ctx) {
@@ -31,13 +32,19 @@ public class Program extends Sep3asmParseRule {
             tk = ct.getCurrentToken(ctx);
         }
         if (tk.getType() != Sep3asmToken.TK_EOF) {
-            ctx.warning(tk.toExplainString() + "ファイルの終わりにゴミがあります");
+            ctx.warning("There is garbage at the end of the file: " + tk.toExplainString());
         }
     }
 
     public void pass1(Sep3asmParseContext pcx) throws FatalErrorException {
+        for (Sep3asmParseRule line : list) {
+            line.pass1(pcx);
+        }
     }
 
     public void pass2(Sep3asmParseContext pcx) throws FatalErrorException {
+        for (Sep3asmParseRule line : list) {
+            line.pass2(pcx);
+        }
     }
 }

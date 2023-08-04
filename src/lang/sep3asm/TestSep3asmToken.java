@@ -18,9 +18,9 @@ public class TestSep3asmToken {
             while (tk.getType() != Sep3asmToken.TK_EOF) {
                 if (tk.getType() == Sep3asmToken.TK_NUM) {
                     ctx.getIOContext().getOutStream()
-                            .println("Token=" + tk.toExplainString() + " valule=" + tk.getIntValue());
+                            .println("Token: " + tk.toExplainString() + ", Value: " + tk.getIntValue());
                 } else {
-                    ctx.getIOContext().getOutStream().println("Token=" + tk.toExplainString());
+                    ctx.getIOContext().getOutStream().println("Token: " + tk.toExplainString());
                 }
                 tk = ctx.getTokenizer().getNextToken(ctx);
             }

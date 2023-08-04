@@ -22,7 +22,7 @@ public class Sep3assembler {
                     parseTree.pass2(pcx); // パス2：機械語生成
                 pcx.errorReport();
             } else {
-                pcx.fatalError(tk.toExplainString() + "プログラムの先頭にゴミがあります");
+                pcx.fatalError("There is garbage at the beginning of the program: " + tk.toExplainString());
             }
         } catch (FatalErrorException e) {
             e.printStackTrace();

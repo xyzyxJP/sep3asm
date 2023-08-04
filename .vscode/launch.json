@@ -37,5 +37,25 @@
                 "bin/lang/sep3asm/fib.s"
             ]
         },
+        {
+            "type": "java",
+            "name": "Sep3assembler on Windows",
+            "request": "launch",
+            "mainClass": "lang.sep3asm.Sep3assembler",
+            "projectName": "sep3asm",
+            "args": [
+                "bin\\lang\\sep3asm\\fib.s"
+            ]
+        },
+        {
+            "type": "java",
+            "name": "Sep3assembler on macOS",
+            "request": "launch",
+            "mainClass": "lang.sep3asm.Sep3assembler",
+            "projectName": "sep3asm",
+            "args": [
+                "bin/lang/sep3asm/fib.s"
+            ]
+        },
     ]
 }

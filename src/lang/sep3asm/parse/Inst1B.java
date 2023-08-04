@@ -7,18 +7,19 @@ import lang.sep3asm.Sep3asmToken;
 import lang.sep3asm.Sep3asmTokenizer;
 import lang.sep3asm.instruction.Sep3Instruction;
 
-public class Inst2 extends Sep3asmParseRule {
-    // inst2 ::= INST2 operand COMMA operand
+public class Inst1B extends Sep3asmParseRule {
+    // inst1b ::= INST1B operand
+    // ex. JMP LABEL
 
     private Sep3asmToken inst;
-    private Operand op1, op2;
+    private Operand op1;
     private Sep3Instruction sep3inst;
 
-    public Inst2(Sep3asmParseContext ctx) {
+    public Inst1B(Sep3asmParseContext ctx) {
     }
 
     public static boolean isFirst(Sep3asmToken tk) {
-        return tk.getType() == Sep3asmToken.TK_INST2;
+        return tk.getType() == Sep3asmToken.TK_INST1B;
     }
 
     public void parse(Sep3asmParseContext ctx) throws FatalErrorException {
@@ -28,25 +29,13 @@ public class Inst2 extends Sep3asmParseRule {
         if (Operand.isFirst(tk)) {
             op1 = new Operand(ctx);
             op1.parse(ctx);
-            tk = ct.getCurrentToken(ctx);
-            if (tk.getType() == Sep3asmToken.TK_COMMA) {
-                tk = ct.getNextToken(ctx);
-            } else {
-                ctx.warning("',' is expected after " + tk.toExplainString());
-            }
-            if (Operand.isFirst(tk)) {
-                op2 = new Operand(ctx);
-                op2.parse(ctx);
-            } else {
-                ctx.warning("operand is expected after " + tk.toExplainString());
-            }
         } else {
             ctx.warning("operand is expected after " + tk.toExplainString());
         }
     }
 
     public void pass1(Sep3asmParseContext ctx) throws FatalErrorException {
-        sep3inst = ctx.getTokenizer().getInstruction(inst.getText(), ctx);
+        sep3inst = inst.getInstruction();
         if (op1 != null) {
             op1.pass1(ctx);
             op1.limit(sep3inst.getOp1Info(), ctx, inst, false);
@@ -56,19 +45,12 @@ public class Inst2 extends Sep3asmParseRule {
                 ctx.addLocationCounter(1);
             }
         }
-        if (op2 != null) {
-            op2.pass1(ctx);
-            op2.limit(sep3inst.getOp2Info(), ctx, inst, true);
-        }
     }
 
     public void pass2(Sep3asmParseContext ctx) throws FatalErrorException {
         if (op1 != null) {
             op1.pass2(ctx);
         }
-        if (op2 != null) {
-            op2.pass2(ctx);
-        }
-        sep3inst.generate(ctx, op1, op2);
+        sep3inst.generate(ctx, op1, null);
     }
 }
